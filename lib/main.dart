@@ -4,12 +4,14 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'main.g.dart';
 
-// We create a "provider", which will store a value (here "Hello world").
-// By using a provider, this allows us to mock/override the value exposed.
 @riverpod
-String helloWorld(HelloWorldRef ref) {
-  return 'Hello world';
+class Counter extends _$Counter {
+  @override
+  int build() => 0;
+  void increment() => state++;
 }
+
+const counterKey = Key('increment_counter');
 
 void main() {
   runApp(
@@ -28,15 +30,15 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String value = ref.watch(helloWorldProvider);
+    final counter = ref.watch(counterProvider);
 
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: const Text('Example')),
         body: Center(
-          child: Text(value),
+          child: TextButton(onPressed: ref.read(counterProvider.notifier).increment, key: counterKey, child: Text(counter.toString()),)
+          )
         ),
-      ),
-    );
+      );
   }
 }
