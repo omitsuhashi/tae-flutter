@@ -29,13 +29,18 @@ class _SystemHash {
   }
 }
 
-String _$helloWorldHash() => r'8bbe6cff2b7b1f4e1f7be3d1820da793259f7bfc';
+String _$CounterHash() => r'4243b34530f53accfd9014a9f0e316fe304ada3e';
 
-/// See also [helloWorld].
-final helloWorldProvider = AutoDisposeProvider<String>(
-  helloWorld,
-  name: r'helloWorldProvider',
+/// See also [Counter].
+final counterProvider = AutoDisposeNotifierProvider<Counter, int>(
+  Counter.new,
+  name: r'counterProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$helloWorldHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$CounterHash,
 );
-typedef HelloWorldRef = AutoDisposeProviderRef<String>;
+typedef CounterRef = AutoDisposeNotifierProviderRef<int>;
+
+abstract class _$Counter extends AutoDisposeNotifier<int> {
+  @override
+  int build();
+}
