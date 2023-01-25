@@ -1,15 +1,6 @@
+import 'package:flt/providers/counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'main.g.dart';
-
-@riverpod
-class Counter extends _$Counter {
-  @override
-  int build() => 0;
-  void increment() => state++;
-}
 
 const counterKey = Key('increment_counter');
 
